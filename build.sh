@@ -4,4 +4,4 @@ git submodule update --init --recursive
 
 source ./env.sh
 make
-make firmware
+make degu.bin
