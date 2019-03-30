@@ -14,7 +14,7 @@ OUTDIR_PREFIX = $(BOARD)
 # Default heap size is 16KB, which is on conservative side, to let
 # it build for smaller boards, but it won't be enough for larger
 # applications, and will need to be increased.
-MICROPY_HEAP_SIZE = 16384
+MICROPY_HEAP_SIZE = 32768
 FROZEN_DIR = scripts
 
 # Default target
