@@ -47,7 +47,8 @@ char *get_gw_addr(unsigned int prefix)
 	struct net_if *iface;
 	struct net_if_ipv6 *ipv6;
 	struct net_if_addr *unicast;
-	int i;
+	struct in6_addr gw_in6_addr;
+	int i, j;
 
 	iface = net_if_get_by_index(0);
 	ipv6 = iface->config.ip.ipv6;
@@ -60,13 +61,14 @@ char *get_gw_addr(unsigned int prefix)
 		}
 
 		if (unicast->address.in6_addr.s6_addr[0] == 0xfd) {
-			for (i = 0; i < 16; i++) {
-				if (i >= prefix / 8) {
-					unicast->address.in6_addr.s6_addr[i] = 0x00;
+			for (j = 0; j < 16; j++) {
+				gw_in6_addr.s6_addr[j] = unicast->address.in6_addr.s6_addr[j];
+				if (j >= prefix / 8) {
+					gw_in6_addr.s6_addr[j] = 0x00;
 				}
 			}
-			unicast->address.in6_addr.s6_addr[15] += 1;
-			return net_sprint_addr(AF_INET6, &unicast->address.in6_addr);
+			gw_in6_addr.s6_addr[15] += 1;
+			return net_sprint_addr(AF_INET6, &gw_in6_addr);
 		}
 	}
 
