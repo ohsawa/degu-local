@@ -32,7 +32,7 @@
 
 // Usually passed from Makefile
 #ifndef MICROPY_HEAP_SIZE
-#define MICROPY_HEAP_SIZE (16 * 1024)
+#define MICROPY_HEAP_SIZE (32 * 1024)
 #endif
 
 #define MICROPY_ENABLE_SOURCE_LINE  (1)
