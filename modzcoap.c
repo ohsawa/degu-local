@@ -30,13 +30,13 @@ STATIC const mp_obj_type_t coap_type;
 
 STATIC void parse_inet_addr(mp_obj_coap_t *coap, mp_obj_t addr_in, struct sockaddr *sockaddr) {
     // We employ the fact that port and address offsets are the same for IPv4 & IPv6
-    struct sockaddr_in *sockaddr_in = (struct sockaddr_in*)sockaddr;
+    struct sockaddr_in6 *sockaddr_in6 = (struct sockaddr_in6*)sockaddr;
 
     mp_obj_t *addr_items;
     mp_obj_get_array_fixed_n(addr_in, 2, &addr_items);
-    sockaddr_in->sin_family = net_context_get_family((void*)coap->sock);
-    RAISE_ERRNO(net_addr_pton(sockaddr_in->sin_family, mp_obj_str_get_str(addr_items[0]), &sockaddr_in->sin_addr));
-    sockaddr_in->sin_port = htons(mp_obj_get_int(addr_items[1]));
+    sockaddr_in6->sin6_family = net_context_get_family((void*)coap->sock);
+    RAISE_ERRNO(net_addr_pton(sockaddr_in6->sin6_family, mp_obj_str_get_str(addr_items[0]), &sockaddr_in6->sin6_addr));
+    sockaddr_in6->sin6_port = htons(mp_obj_get_int(addr_items[1]));
 }
 
 STATIC mp_obj_t coap_client_make_new(const mp_obj_type_t *type, size_t n_args, size_t n_kw, const mp_obj_t *args) {
