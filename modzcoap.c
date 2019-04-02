@@ -21,7 +21,6 @@
 
 typedef struct _mp_obj_coap_t {
 	mp_obj_base_t base;
-	//struct coap_dtls
 	int sock;
 } mp_obj_coap_t;
 
@@ -133,7 +132,7 @@ STATIC mp_obj_t coap_request_get(mp_obj_t self_in, mp_obj_t path) {
 
 	data = (u8_t *)m_malloc(MAX_COAP_MSG_LEN);
 	if (!data) {
-		printf("can't malloc to \send packet\n");
+		printf("can't malloc to send packet\n");
 		RAISE_SYSCALL_ERRNO(-1);
 	}
 

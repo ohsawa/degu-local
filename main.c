@@ -111,7 +111,6 @@ int bg_main(char *src, size_t len) {
 
     init_zephyr();
 
-soft_reset:
     #if MICROPY_ENABLE_GC
     gc_init(heap, heap + sizeof(heap));
     #endif
