@@ -5,7 +5,6 @@
 #include "py/runtime.h"
 #include "py/binary.h"
 
-//#include <stdint.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -75,7 +74,7 @@ STATIC mp_obj_t coap_request_post(mp_obj_t self_in, mp_obj_t path, mp_obj_t payl
 	struct coap_packet request;
 	u8_t *data;
 
-	data = (u8_t *)malloc(MAX_COAP_MSG_LEN);
+	data = (u8_t *)m_malloc(MAX_COAP_MSG_LEN);
 	if (!data) {
 		printf("can't malloc\n");
 		RAISE_SYSCALL_ERRNO(-1);
@@ -132,9 +131,9 @@ STATIC mp_obj_t coap_request_get(mp_obj_t self_in, mp_obj_t path) {
 	const u8_t *payload;
 	u16_t payload_len;
 
-	data = (u8_t *)malloc(MAX_COAP_MSG_LEN);
+	data = (u8_t *)m_malloc(MAX_COAP_MSG_LEN);
 	if (!data) {
-		printf("can't malloc to send packet\n");
+		printf("can't malloc to \send packet\n");
 		RAISE_SYSCALL_ERRNO(-1);
 	}
 
